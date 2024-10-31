@@ -1,7 +1,9 @@
+# SLSのプロジェクト
 resource "alicloud_log_project" "main" {
   project_name = "function-compute-log"
 }
 
+# SLSのログストア
 resource "alicloud_log_store" "main" {
   project_name          = alicloud_log_project.main.id
   logstore_name         = "function-log"
