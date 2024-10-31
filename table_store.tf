@@ -27,18 +27,3 @@ resource "alicloud_ots_table" "event_forms" {
     alicloud_ots_instance.test_instance
   ]
 }
-
-resource "alicloud_ots_table" "test_forms" {
-  instance_name = alicloud_ots_instance.test_instance.name
-  table_name    = "forms"
-  time_to_live  = -1
-  max_version   = 1
-  primary_key {
-    name = "PK"
-    type = "String"
-  }
-
-  depends_on = [
-    alicloud_ots_instance.test_instance
-  ]
-}

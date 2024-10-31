@@ -1,9 +1,9 @@
-resource "alicloud_log_project" "trigger_table_store" {
-  project_name = var.sls_project_name
+resource "alicloud_log_project" "main" {
+  project_name = "function-compute-log"
 }
 
-resource "alicloud_log_store" "trigger_table_store" {
-  project_name          = alicloud_log_project.trigger_table_store.id
+resource "alicloud_log_store" "main" {
+  project_name          = alicloud_log_project.main.id
   logstore_name         = "function-log"
   shard_count           = 3
   auto_split            = true
@@ -12,4 +12,7 @@ resource "alicloud_log_store" "trigger_table_store" {
   enable_web_tracking   = true
   append_meta           = false
   timeouts {}
+  depends_on = [
+    alicloud_log_project.main
+  ]
 }

@@ -30,23 +30,24 @@ resource "alicloud_ram_role_policy_attachment" "fc_default_policy" {
 
 
 resource "alicloud_ram_role" "trigger_role" {
-  name        = "AliyunTableStoreStreamNotificationRole"
-  document    = <<EOF
-    {
-      "Statement": [
-        {
-          "Action": "sts:AssumeRole",
-          "Effect": "Allow",
-          "Principal": {
-            "RAM": [
-              "acs:ram::${var.alicloud_account_id}:root"
-            ]
-          }
+  name = "AliyunTableStoreStreamNotificationRole"
+  document = jsonencode({
+    Version = "1"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = [
+            "ots.aliyuncs.com"
+          ]
+          RAM = [
+            "acs:ram::1604337383174619:root"
+          ]
         }
-      ],
-      "Version": "1"
-    }
-  EOF
+      }
+    ]
+  })
   description = "trigger role for OTS to invoke functions of {serviceName}"
   timeouts {}
 }
