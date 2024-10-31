@@ -1,22 +1,20 @@
 # Function Computeのデフォルトロール
 resource "alicloud_ram_role" "fc_default" {
-  name        = "AliyunFcDefaultRole"
-  document    = <<EOF
-  {
-    "Statement": [
+  name = "AliyunFcDefaultRole"
+  document = jsonencode({
+    "Statement" : [
       {
-        "Action": "sts:AssumeRole",
-        "Effect": "Allow",
-        "Principal": {
-          "Service": [
+        "Action" : "sts:AssumeRole",
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : [
             "fc.aliyuncs.com"
           ]
         }
       }
     ],
-    "Version": "1"
-}
-  EOF
+    "Version" : "1"
+  })
   description = "Default Service Role for FC to operate other resource"
 }
 
