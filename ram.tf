@@ -52,6 +52,7 @@ resource "alicloud_ram_role" "trigger_role" {
   timeouts {}
 }
 
+# TableStore Stream から Function Compute サービス関数をトリガーするためのポリシー
 resource "alicloud_ram_policy" "trigger_policy" {
   policy_name = "AliyunTableStoreStreamNotificationRolePolicy"
   policy_document = jsonencode({
@@ -81,6 +82,7 @@ resource "alicloud_ram_policy" "trigger_policy" {
   timeouts {}
 }
 
+# TableStore Stream から Function Compute サービス関数をトリガーするためのロールにポリシーをアタッチ
 resource "alicloud_ram_role_policy_attachment" "trigger_policy_attach" {
   policy_name = alicloud_ram_policy.trigger_policy.policy_name
   policy_type = "Custom"
