@@ -1,3 +1,4 @@
+# Function Computeのデフォルトロール
 resource "alicloud_ram_role" "fc_default" {
   name        = "AliyunFcDefaultRole"
   document    = <<EOF
@@ -19,6 +20,7 @@ resource "alicloud_ram_role" "fc_default" {
   description = "Default Service Role for FC to operate other resource"
 }
 
+# デフォルトのポリシーをアタッチ
 resource "alicloud_ram_role_policy_attachment" "fc_default_policy" {
   policy_name = "AliyunFCDefaultRolePolicy"
   policy_type = "System"
@@ -28,7 +30,7 @@ resource "alicloud_ram_role_policy_attachment" "fc_default_policy" {
   ]
 }
 
-
+// TableStore Stream から Function Compute サービス関数をトリガーするためのロールとポリシーを作成
 resource "alicloud_ram_role" "trigger_role" {
   name = "AliyunTableStoreStreamNotificationRole"
   document = jsonencode({
@@ -42,7 +44,7 @@ resource "alicloud_ram_role" "trigger_role" {
             "ots.aliyuncs.com"
           ]
           RAM = [
-            "acs:ram::1604337383174619:root"
+            "acs:ram::${var.alicloud_account_id}:root" // Alibaba Cloud Account ID(自分のとは異なる)
           ]
         }
       }

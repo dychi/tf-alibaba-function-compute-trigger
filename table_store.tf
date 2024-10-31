@@ -1,3 +1,4 @@
+# TableStoreのインスタンス
 resource "alicloud_ots_instance" "test_instance" {
   name          = "test-fc"
   accessed_by   = "Any"
@@ -13,6 +14,7 @@ resource "alicloud_ots_instance" "test_instance" {
   }
 }
 
+# TableStoreのテーブル
 resource "alicloud_ots_table" "event_forms" {
   instance_name = alicloud_ots_instance.test_instance.name
   table_name    = "event_forms"

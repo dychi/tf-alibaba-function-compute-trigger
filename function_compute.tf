@@ -1,3 +1,4 @@
+# Function Computeの設定
 resource "alicloud_fcv3_function" "table_store" {
   function_name = "tablestore-trigger-func"
   memory_size   = "512"
@@ -23,6 +24,7 @@ resource "alicloud_fcv3_function" "table_store" {
   internet_access = "true"
 }
 
+# Tablestoreのトリガーを設定
 resource "alicloud_fcv3_trigger" "trigger" {
   trigger_type    = "tablestore"
   trigger_name    = "test-tablestore-trigger"

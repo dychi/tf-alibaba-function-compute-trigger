@@ -9,11 +9,6 @@ variable "secret_key" {
   sensitive   = true
 }
 
-variable "sls_project_name" {
-  description = "The name of the Log Service project"
-  type        = string
-}
-
 variable "resource_group_id" {
   description = "The ID of the resource group"
   type        = string
