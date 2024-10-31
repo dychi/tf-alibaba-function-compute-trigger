@@ -18,3 +18,9 @@ variable "resource_group_id" {
   description = "The ID of the resource group"
   type        = string
 }
+
+variable "alicloud_account_id" {
+  description = "The ID of the Alibaba Cloud account"
+  type        = string
+
+}

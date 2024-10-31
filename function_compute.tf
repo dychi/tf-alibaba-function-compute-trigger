@@ -19,3 +19,14 @@ resource "alicloud_fcv3_function" "trigger_table_store" {
   timeouts {}
   internet_access = "true"
 }
+
+resource "alicloud_fcv3_trigger" "trigger_table_store" {
+  trigger_type    = "tablestore"
+  trigger_name    = "test-tablestore-trigger"
+  qualifier       = "LATEST"
+  trigger_config  = jsonencode({})
+  source_arn      = local.trigger_table_store_arn
+  invocation_role = alicloud_ram_role.trigger_role.arn
+  function_name   = alicloud_fcv3_function.trigger_table_store.function_name
+  timeouts {}
+}
